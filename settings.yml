@@ -1,15 +1,15 @@
-house_ads_hack_source_script:
+house_ads_livewrapped_source_script:
   default: 'lwadm.com/lw/pbjs?pid='
   type: string
   description:
     en: "source main script"
-house_ads_hack_source_script_pid:
+house_ads_livewrapped_source_script_pid:
   default: ''
   type: string
   description:
     en:  "Enter the source script pid"
-house_ads_hack_source_tag_id_base_string:
-  default: 'rikatillsammans_desktop-panorama-#_a'
+house_ads_livewrapped_source_tag_id_base_string:
+  default: ''
   type: string
   description:
     en:  "Enter the tag id format, placing a # where the iteration number should be"

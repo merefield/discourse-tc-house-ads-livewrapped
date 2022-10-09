@@ -30,7 +30,7 @@ let _loaded = false,
   }
 
 export default {
-  name: "house-ads-hack-edits",
+  name: "house-ads-livewrapped",
   initialize(container) {
     withPluginApi("0.8.40", (api) => {
 
@@ -44,11 +44,11 @@ export default {
             return; // Don't load external JS during tests
           };
       
-          loadMainAdScript(settings.house_ads_hack_source_script, settings.house_ads_hack_source_script_pid).then(
+          loadMainAdScript(settings.house_ads_livewrapped_source_script, settings.house_ads_livewrapped_source_script_pid).then(
             () => {
               window.lwhb.cmd.push(() => {
                 window.lwhb.loadAd({
-                  tagId: settings.house_ads_hack_source_tag_id_base_string.replace("#", this.adIndex)
+                  tagId: settings.house_ads_livewrapped_source_tag_id_base_string.replace("#", this.adIndex)
                 });
               });
             }
@@ -62,7 +62,7 @@ export default {
 
         @discourseComputed("adIndex")
         thisId(adIndex) {
-          return settings.house_ads_hack_source_tag_id_base_string.replace("#", adIndex)
+          return settings.house_ads_livewrapped_source_tag_id_base_string.replace("#", adIndex)
         },
 
         
