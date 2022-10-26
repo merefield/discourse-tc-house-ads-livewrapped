@@ -48,7 +48,10 @@ export default {
             () => {
               window.lwhb.cmd.push(() => {
                 window.lwhb.loadAd({
-                  tagId: settings.house_ads_livewrapped_source_tag_id_base_string.replace("#", this.adIndex)
+                  tagId: settings.house_ads_livewrapped_source_tag_id_base_string_desktop.replace("#", this.adIndex)
+                });
+                window.lwhb.loadAd({
+                  tagId: settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", this.adIndex)
                 });
               });
             }
