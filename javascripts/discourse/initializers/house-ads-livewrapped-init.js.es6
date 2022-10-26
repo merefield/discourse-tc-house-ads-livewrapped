@@ -57,15 +57,24 @@ export default {
 
         @discourseComputed("postNumber")
         adIndex(postNumber) {
-          return postNumber/this.site.get("house_creatives").settings.after_nth_post;
+          baseIndex = postNumber/this.site.get("house_creatives").settings.after_nth_post;
+
+          if (baseIndex < 3) {
+            return baseIndex
+          } else {
+            return `2_${baseIndex - 2}`
+          }
         },
 
         @discourseComputed("adIndex")
-        thisId(adIndex) {
-          return settings.house_ads_livewrapped_source_tag_id_base_string.replace("#", adIndex)
+        thisDesktopId(adIndex) {
+          return settings.house_ads_livewrapped_source_tag_id_base_string_desktop.replace("#", adIndex)
         },
 
-        
+        @discourseComputed("adIndex")
+        thisMobileId(adIndex) {
+          return settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", adIndex)
+        },
 
         didInsertElement() {
           this._super();
