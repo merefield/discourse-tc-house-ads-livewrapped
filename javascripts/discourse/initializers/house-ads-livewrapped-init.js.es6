@@ -60,7 +60,7 @@ export default {
 
         @discourseComputed("postNumber")
         adIndex(postNumber) {
-          baseIndex = postNumber/this.site.get("house_creatives").settings.after_nth_post;
+          let baseIndex = postNumber/this.site.get("house_creatives").settings.after_nth_post;
 
           if (baseIndex < 3) {
             return baseIndex
