@@ -40,7 +40,7 @@ export default {
         pluginId: PLUGIN_ID,
 
         _triggerAds() {
-          if (isTesting()) {
+          if (isTesting() || this.adIndex < 1 || this.adIndex === null || this.adIndex === undefined) {
             return; // Don't load external JS during tests
           };
       
@@ -60,6 +60,8 @@ export default {
 
         @discourseComputed("postNumber")
         adIndex(postNumber) {
+          if (postNumber === undefined || postNumber === null) {return 0}
+
           let baseIndex = postNumber/this.site.get("house_creatives").settings.after_nth_post;
 
           if (baseIndex < 3) {
