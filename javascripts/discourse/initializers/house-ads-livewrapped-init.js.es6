@@ -114,6 +114,16 @@ export default {
           return settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", adIndex)
         },
 
+        @discourseComputed("adIndex")
+        desktopClasses(adIndex) {
+          return settings.house_ads_livewrapped_desktop_classes
+        },
+
+        @discourseComputed("adIndex")
+        mobileClasses(adIndex) {
+          return settings.house_ads_livewrapped_mobile_classes
+        },
+
         didInsertElement() {
           this._super();
           scheduleOnce("afterRender", this, this._triggerAds);
