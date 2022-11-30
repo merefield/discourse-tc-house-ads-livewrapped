@@ -2,6 +2,7 @@ import discourseComputed from "discourse-common/utils/decorators";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { scheduleOnce } from "@ember/runloop";
 import { isTesting } from "discourse-common/config/environment";
+import { isBlank } from "@ember/utils";
 import loadScript from "discourse/lib/load-script";
 import RSVP from "rsvp";
 
@@ -59,6 +60,13 @@ export default {
       window.lwhb = window.lwhb || { cmd: [] }; 
       window.googletag = window.googletag || {cmd: []};
 
+      api.modifyClass("component:ad-slot", {
+        @discourseComputed("placement", "postNumber", "indexNumber")
+        availableAdTypes(placement, postNumber, indexNumber) {
+          return ["house-ad"]
+        },
+      });
+
       api.modifyClass("component:house-ad", {
         pluginId: PLUGIN_ID,
 
@@ -95,7 +103,25 @@ export default {
         adIndex(postNumber) {
           if (postNumber === undefined || postNumber === null) {return 0}
 
-          let baseIndex = postNumber/this.site.get("house_creatives").settings.after_nth_post;
+          let topicLength = this.posts_count;
+          let every = this.site.get("house_creatives").settings.after_nth_post;
+          let baseIndex = 0;
+
+          if (postNumber != topicLength) {
+            if (settings.house_ads_livewrapped_always_start_at_op) {
+              baseIndex = (postNumber + every - 1)/ every
+            } else {
+              baseIndex = postNumber/every;
+            }
+          } else {
+            baseIndex = (postNumber + every - 1)/every
+
+            if (settings.house_ads_livewrapped_always_at_last_post) {
+              baseIndex = Math.ceil(baseIndex)
+            }
+          }
+
+          if (baseIndex != Math.floor(baseIndex)) {return 0}
 
           if (baseIndex < 3) {
             return baseIndex
@@ -114,14 +140,13 @@ export default {
           return settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", adIndex)
         },
 
-        @discourseComputed("adIndex")
-        desktopClasses(adIndex) {
-          return settings.house_ads_livewrapped_desktop_classes
-        },
+        @discourseComputed("postNumber", "placement")
+        showAfterPost(postNumber, placement) {
+          if (!postNumber && placement !== "topic-list-between") {
+            return true;
+          }
 
-        @discourseComputed("adIndex")
-        mobileClasses(adIndex) {
-          return settings.house_ads_livewrapped_mobile_classes
+          return true;
         },
 
         didInsertElement() {

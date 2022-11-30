@@ -13,3 +13,13 @@ house_ads_livewrapped_source_tag_id_base_string_mobile:
   type: string
   description:
     en:  "Enter the tag id format, placing a # where the iteration number should be (mobile)"
+house_ads_livewrapped_always_start_at_op:
+  default: true
+  type: bool
+  description:
+    en: "Always start series immediately after first Post"
+house_ads_livewrapped_always_at_last_post:
+  default: true
+  type: bool
+  description:
+    en: "Always place ad after last Post"
