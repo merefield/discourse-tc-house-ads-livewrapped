@@ -56,8 +56,10 @@ export default {
   initialize(container) {
     withPluginApi("0.8.40", (api) => {
 
-      window.lwhb = window.lwhb || { cmd: [] }; 
-      window.googletag = window.googletag || {cmd: []};
+      api.onPageChange(() => {
+        window.lwhb = { cmd: [] };
+        window.googletag =  { cmd: [] };
+      });
 
       api.modifyClass("component:house-ad", {
         pluginId: PLUGIN_ID,
