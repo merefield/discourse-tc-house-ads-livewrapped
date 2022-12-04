@@ -60,8 +60,9 @@ export default {
       window.googletag = window.googletag || { cmd: [] };
 
       api.onPageChange(() => {
-        window.lwhb = { cmd: [] };
-        window.googletag =  { cmd: [] };
+        window.lwhb.cmd.push(() => {
+          window.lwhb.resetPage(true)
+        })
       });
 
       api.modifyClass("component:house-ad", {
@@ -133,7 +134,17 @@ export default {
           this._super();
           scheduleOnce("afterRender", this, this._triggerAds);
         },
-      
+
+        willDestroyElement() {
+          window.lwhb.cmd.push(() => {
+            window.lwhb.removeAdUnit({
+              tagId: settings.house_ads_livewrapped_source_tag_id_base_string_desktop.replace("#", this.adIndex)
+            });
+            window.lwhb.removeAdUnit({
+              tagId: settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", this.adIndex)
+            });
+          });
+        }
       })
     })
   }
