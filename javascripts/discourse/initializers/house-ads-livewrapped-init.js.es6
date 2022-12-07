@@ -75,6 +75,16 @@ export default {
 
       api.modifyClass("component:house-ad", {
         pluginId: PLUGIN_ID,
+        classNameBindings: ['isValidAdSpot'],
+
+        @discourseComputed("adIndex")
+        isValidAdSpot() {
+          if (this.adIndex !== undefined && this.adIndex !== null && this.adIndex > 0) {
+            return 'active-ad-location';
+          } else {
+            return 'inactive-ad-location';
+          }
+        },
 
         _triggerAds() {
           if (isTesting() || this.adIndex < 1 || this.adIndex === null || this.adIndex === undefined) {
