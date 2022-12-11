@@ -79,7 +79,7 @@ export default {
 
         @discourseComputed("adIndex")
         isValidAdSpot() {
-          if (this.adIndex !== undefined && this.adIndex !== null && this.adIndex > 0) {
+          if (this.adIndex !== undefined && this.adIndex !== null && this.adIndex !== 0) {
             return 'active-ad-location';
           } else {
             return 'inactive-ad-location';
