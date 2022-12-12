@@ -119,7 +119,7 @@ export default {
         adIndex(postNumber) {
           if (postNumber === undefined || postNumber === null) {return 0}
 
-          let topicLength = this.posts_count;
+          let topicLength = this.highest_post_number;
           let every = this.site.get("house_creatives").settings.after_nth_post;
           let baseIndex = 0;
 
