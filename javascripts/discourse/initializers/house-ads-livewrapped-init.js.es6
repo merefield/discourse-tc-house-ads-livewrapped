@@ -115,7 +115,7 @@ export default {
           )
         },
 
-        @discourseComputed("postNumber")
+        @discourseComputed("postNumber","highest_post_number")
         adIndex(postNumber) {
           if (postNumber === undefined || postNumber === null) {return 0}
 
