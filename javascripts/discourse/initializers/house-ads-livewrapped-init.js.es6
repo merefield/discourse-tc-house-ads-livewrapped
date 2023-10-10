@@ -67,6 +67,8 @@ export default {
       });
 
       api.modifyClass("component:ad-slot", {
+        pluginId: PLUGIN_ID,
+
         @discourseComputed("placement", "postNumber", "indexNumber")
         availableAdTypes(placement, postNumber, indexNumber) {
           return ["house-ad"]
