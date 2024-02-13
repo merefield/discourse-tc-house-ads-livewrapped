@@ -1,12 +1,15 @@
 {{#each adComponents as |adComponent|}}
-  {{component adComponent
-    placement=placement
-    refreshOnChange=refreshOnChange
-    category=category
-    listLoading=listLoading
-    postNumber=postNumber
-    highest_post_number=highest_post_number
-    indexNumber=indexNumber
-    tagName=childTagName
-  }}
+  {{! Trick to force full destroy/re-render of component when route changes }}
+  {{#each (array this.router.currentRoute)}}
+    {{component adComponent
+      placement=placement
+      refreshOnChange=refreshOnChange
+      category=category
+      listLoading=listLoading
+      postNumber=postNumber
+      highest_post_number=highest_post_number
+      indexNumber=indexNumber
+      tagName=childTagName
+    }}
+  {{/each}}
 {{/each}}

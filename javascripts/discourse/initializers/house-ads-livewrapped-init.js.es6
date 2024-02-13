@@ -125,7 +125,7 @@ export default {
           let every = this.site.get("house_creatives").settings.after_nth_post;
           let baseIndex = 0;
 
-          if (postNumber != topicLength) {
+          if (postNumber !== topicLength) {
             if (settings.house_ads_livewrapped_always_start_at_op) {
               baseIndex = (postNumber + every - 1)/ every
             } else {
