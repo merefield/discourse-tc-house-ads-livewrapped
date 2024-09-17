@@ -61,9 +61,10 @@ export default {
       window.googletag = window.googletag || { cmd: [] };
 
       api.onPageChange(() => {
-        window.lwhb.cmd.push(() => {
-          window.lwhb.resetPage(true)
-        })
+        // console.log('page flip');
+        // window.lwhb.cmd.push(() => {
+        //   window.lwhb.resetPage(true)
+        // })
       });
 
       api.modifyClass("component:ad-slot", {
@@ -89,32 +90,23 @@ export default {
         },
 
         _triggerAds() {
+          // console.log('ad number: ' + this.adIndex);
           if (isTesting() || this.adIndex < 1 || this.adIndex === null || this.adIndex === undefined) {
             return; // Don't load external JS during tests
           };
 
-          loadGooglePublisherTagScript().then(
+          loadMainAdScript(settings.house_ads_livewrapped_source_script_pid).then(
             () => {
-              loadMainAdScript(settings.house_ads_livewrapped_source_script_pid).then(
-                () => {
-                  window.lwhb.cmd.push(() => {
-                    window.lwhb.loadAd({
-                      tagId: settings.house_ads_livewrapped_source_tag_id_base_string_desktop.replace("#", this.adIndex)
-                    });
-                    window.lwhb.loadAd({
-                      tagId: settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", this.adIndex)
-                    });
-                  });
-                  googletag.cmd.push(function() {
-                    googletag.pubads().setForceSafeFrame(true)
-                    googletag.pubads().disableInitialLoad();
-                    googletag.pubads().enableSingleRequest();
-                    googletag.enableServices();
-                  });
-                }
-              );
+              window.lwhb.cmd.push(() => {
+                window.lwhb.loadAd({
+                  tagId: settings.house_ads_livewrapped_source_tag_id_base_string_desktop.replace("#", this.adIndex)
+                });
+                window.lwhb.loadAd({
+                  tagId: settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", this.adIndex)
+                });
+              });
             }
-          )
+          );
         },
 
         @discourseComputed("postNumber","highest_post_number")
