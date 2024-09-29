@@ -16,11 +16,6 @@ export default {
       window.lwhb = window.lwhb || { cmd: [] };
       window.googletag = window.googletag || { cmd: [] };
 
-      api.onPageChange(() => {
-        console.log('INFO: page change: reset lw page ads');
-        window.lwhb.cmd.push(() => { window.lwhb.resetPage(true) })
-      });
-
       api.modifyClass("component:ad-slot", {
         pluginId: PLUGIN_ID,
 
