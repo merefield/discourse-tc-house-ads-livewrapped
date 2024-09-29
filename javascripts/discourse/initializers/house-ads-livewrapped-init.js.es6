@@ -7,50 +7,6 @@ import loadScript from "discourse/lib/load-script";
 import RSVP from "rsvp";
 
 const PLUGIN_ID = "discourse-tc-ads-hack";
-const LIVEWRAPPED_SCRIPT_SRC = "https://lwadm.com/lw/pbjs"
-const GOOGLE_PUBLISHER_TAG_SCRIPT_SRC = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
-
-let _mainLoaded = false,
-  _mainPromise = null,
-  _GPTLoaded = false,
-  _GPTPromise = null,
-  _c = 0;
-
-  function loadMainAdScript(pid) {
-    if (_mainLoaded) {
-      return RSVP.resolve();
-    }
-
-    if (_mainPromise) {
-      return _mainPromise;
-    }
-
-    _mainPromise = loadScript(LIVEWRAPPED_SCRIPT_SRC + "?pid=" + pid, {
-      scriptTag: true,
-    }).then(function () {
-      _mainLoaded = true;
-    });
-
-    return _mainPromise;
-  }
-
-  function loadGooglePublisherTagScript () {
-    if (_GPTLoaded) {
-      return RSVP.resolve();
-    }
-
-    if (_GPTPromise) {
-      return _GPTPromise;
-    }
-
-    _GPTPromise = loadScript(GOOGLE_PUBLISHER_TAG_SCRIPT_SRC, {
-      scriptTag: true,
-    }).then(function () {
-      _GPTLoaded = true;
-    });
-
-    return _GPTPromise;
-  }
 
 export default {
   name: "house-ads-livewrapped",
@@ -61,10 +17,8 @@ export default {
       window.googletag = window.googletag || { cmd: [] };
 
       api.onPageChange(() => {
-        // console.log('page flip');
-        // window.lwhb.cmd.push(() => {
-        //   window.lwhb.resetPage(true)
-        // })
+        console.log('INFO: page change: reset lw page ads');
+        window.lwhb.cmd.push(() => { window.lwhb.resetPage(true) })
       });
 
       api.modifyClass("component:ad-slot", {
@@ -89,24 +43,14 @@ export default {
           }
         },
 
-        _triggerAds() {
-          // console.log('ad number: ' + this.adIndex);
-          if (isTesting() || this.adIndex < 1 || this.adIndex === null || this.adIndex === undefined) {
-            return; // Don't load external JS during tests
-          };
+        @discourseComputed
+        tagIdBaseStringDesktop() {
+          return settings.house_ads_livewrapped_source_tag_id_base_string_desktop;
+        },
 
-          loadMainAdScript(settings.house_ads_livewrapped_source_script_pid).then(
-            () => {
-              window.lwhb.cmd.push(() => {
-                window.lwhb.loadAd({
-                  tagId: settings.house_ads_livewrapped_source_tag_id_base_string_desktop.replace("#", this.adIndex)
-                });
-                window.lwhb.loadAd({
-                  tagId: settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", this.adIndex)
-                });
-              });
-            }
-          );
+        @discourseComputed
+        tagIdBaseStringMobile() {
+          return settings.house_ads_livewrapped_source_tag_id_base_string_mobile;
         },
 
         @discourseComputed("postNumber","highest_post_number")
@@ -158,22 +102,6 @@ export default {
 
           return true;
         },
-
-        didInsertElement() {
-          this._super();
-          scheduleOnce("afterRender", this, this._triggerAds);
-        },
-
-        willDestroyElement() {
-          window.lwhb.cmd.push(() => {
-            window.lwhb.removeAdUnit({
-              tagId: settings.house_ads_livewrapped_source_tag_id_base_string_desktop.replace("#", this.adIndex)
-            });
-            window.lwhb.removeAdUnit({
-              tagId: settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", this.adIndex)
-            });
-          });
-        }
       })
     })
   }
