@@ -1,10 +1,5 @@
 import discourseComputed from "discourse-common/utils/decorators";
 import { withPluginApi } from "discourse/lib/plugin-api";
-import { scheduleOnce } from "@ember/runloop";
-import { isTesting } from "discourse-common/config/environment";
-import { isBlank } from "@ember/utils";
-import loadScript from "discourse/lib/load-script";
-import RSVP from "rsvp";
 
 const PLUGIN_ID = "discourse-tc-ads-hack";
 

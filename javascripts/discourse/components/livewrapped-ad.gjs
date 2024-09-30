@@ -8,9 +8,7 @@ import { isTesting } from "discourse-common/config/environment";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import willDestroy from "@ember/render-modifiers/modifiers/will-destroy";
 
-const PLUGIN_ID = "discourse-tc-ads-hack";
 const LIVEWRAPPED_SCRIPT_SRC = "https://lwadm.com/lw/pbjs";
-const GOOGLE_PUBLISHER_TAG_SCRIPT_SRC = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
 
 export default class LivewrappedAd extends Component {
         
