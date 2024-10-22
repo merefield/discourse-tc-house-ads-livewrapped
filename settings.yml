@@ -23,3 +23,23 @@ house_ads_livewrapped_always_at_last_post:
   type: bool
   description:
     en: "Always place ad after last Post"
+house_ads_livewrapped_tag_id_above_discovery_mobile:
+  default: ''
+  type: string
+  description:
+    en: "Enter the tag id for the ad above discovery (mobile)"
+house_ads_livewrapped_tag_id_above_discovery_desktop:
+  default: ''
+  type: string
+  description:
+    en: "Enter the tag id for the ad above discovery (desktop)"
+house_ads_livewrapped_tag_id_above_suggested_mobile:
+  default: ''
+  type: string
+  description:
+    en: "Enter the tag id for the ad above suggested (mobile)"
+house_ads_livewrapped_tag_id_above_suggested_desktop:
+  default: ''
+  type: string
+  description:
+    en: "Enter the tag id for the ad above suggested (desktop)"
