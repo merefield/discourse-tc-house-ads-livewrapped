@@ -33,15 +33,25 @@ export default {
           }
         },
 
-        @discourseComputed
-        tagIdBaseStringDesktop() {
-          return settings.house_ads_livewrapped_source_tag_id_base_string_desktop;
-        },
+        // @discourseComputed
+        // tagIdBaseStringDesktop() {
+        //   return settings.house_ads_livewrapped_source_tag_id_base_string_desktop;
+        // },
 
-        @discourseComputed
-        tagIdBaseStringMobile() {
-          return settings.house_ads_livewrapped_source_tag_id_base_string_mobile;
-        },
+        // @discourseComputed
+        // tagIdBaseStringMobile() {
+        //   return settings.house_ads_livewrapped_source_tag_id_base_string_mobile;
+        // },
+
+        // @discourseComputed("tagIdBaseStringDesktop")
+        // tagIdDesktop() {
+        //   return this.tagIdBaseStringDesktop.replace("#", this.adIndex)
+        // }
+
+        // @discourseComputed("tagIdBaseStringMobile")
+        // tagIdMobile() {
+        //   return this.tagIdBaseStringMobile.replace("#", this.adIndex)
+        // }
 
         @discourseComputed("postNumber","highest_post_number")
         adIndex(postNumber) {
@@ -75,12 +85,12 @@ export default {
         },
 
         @discourseComputed("adIndex")
-        thisDesktopId(adIndex) {
+        tagIdDesktop(adIndex) {
           return settings.house_ads_livewrapped_source_tag_id_base_string_desktop.replace("#", adIndex)
         },
 
         @discourseComputed("adIndex")
-        thisMobileId(adIndex) {
+        tagIdMobile(adIndex) {
           return settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", adIndex)
         },
 
