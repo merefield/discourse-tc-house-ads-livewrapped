@@ -25,8 +25,10 @@ export default class AdAboveSuggested extends Component {
 
   <template>
     {{#if this.showAd}}
-      <LivewrappedAd @tagId={{this.tagIdDesktop}} @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_desktop_classes')}}/>
-      <LivewrappedAd @tagId={{this.tagIdMobile}}  @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_mobile_classes')}}/>
+      <div class="livewrapped-ad-above-suggested">
+        <LivewrappedAd @tagId={{this.tagIdDesktop}} @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_desktop_classes')}}/>
+        <LivewrappedAd @tagId={{this.tagIdMobile}}  @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_mobile_classes')}}/>
+      </div>
     {{/if}}
   </template>
 }
