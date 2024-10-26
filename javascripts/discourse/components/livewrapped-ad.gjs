@@ -21,11 +21,11 @@ export default class LivewrappedAd extends Component {
     await loadScript(LIVEWRAPPED_SCRIPT_SRC + "?pid=" + settings.house_ads_livewrapped_source_script_pid, {
       scriptTag: true,
     });
-    console.log('INFO: lwc triggered: ' + this.args.tagIdBaseString.replace("#", this.args.adIndex))
+    console.log('INFO: lwc triggered: ' + this.args.tagId);
 
     window.lwhb.cmd.push(() => {
       window.lwhb.loadAd({
-        tagId: this.args.tagIdBaseString.replace("#", this.args.adIndex)
+        tagId: this.args.tagId
       });
     });
   }
@@ -34,12 +34,12 @@ export default class LivewrappedAd extends Component {
   triggerDestroy() {
     window.lwhb.cmd.push(() => {
       window.lwhb.removeAdUnit({
-        tagId: this.args.tagIdBaseString.replace("#", this.args.adIndex)
+        tagId: this.args.tagId
       });
     })
   }
 
  <template>
-   <div {{didInsert this.triggerAd}} {{willDestroy this.triggerDestroy}} id="{{@thisId}}" class="{{@adClass}}"></div>
+   <div {{didInsert this.triggerAd}} {{willDestroy this.triggerDestroy}} id="{{@tagId}}" class="{{@adClass}}"></div>
  </template>
 }

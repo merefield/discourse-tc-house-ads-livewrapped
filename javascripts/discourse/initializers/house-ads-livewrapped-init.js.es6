@@ -33,16 +33,6 @@ export default {
           }
         },
 
-        @discourseComputed
-        tagIdBaseStringDesktop() {
-          return settings.house_ads_livewrapped_source_tag_id_base_string_desktop;
-        },
-
-        @discourseComputed
-        tagIdBaseStringMobile() {
-          return settings.house_ads_livewrapped_source_tag_id_base_string_mobile;
-        },
-
         @discourseComputed("postNumber","highest_post_number")
         adIndex(postNumber) {
           if (postNumber === undefined || postNumber === null) {return 0}
@@ -75,12 +65,12 @@ export default {
         },
 
         @discourseComputed("adIndex")
-        thisDesktopId(adIndex) {
+        tagIdDesktop(adIndex) {
           return settings.house_ads_livewrapped_source_tag_id_base_string_desktop.replace("#", adIndex)
         },
 
         @discourseComputed("adIndex")
-        thisMobileId(adIndex) {
+        tagIdMobile(adIndex) {
           return settings.house_ads_livewrapped_source_tag_id_base_string_mobile.replace("#", adIndex)
         },
 
