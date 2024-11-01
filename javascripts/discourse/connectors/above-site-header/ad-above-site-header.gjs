@@ -11,13 +11,13 @@ export default class AdAboveSiteHeader extends Component {
            settings.house_ads_livewrapped_tag_id_above_site_header_desktop != "" && !this.site.mobileView;
   }
 
-  get tagIdDesktop() {
-    return settings.house_ads_livewrapped_tag_id_above_site_header_desktop;
+  get tagId() {
+    return this.site.mobileView ? settings.house_ads_livewrapped_tag_id_above_site_header_mobile : settings.house_ads_livewrapped_tag_id_above_site_header_desktop;
   }
-  
-  // get tagIdMobile() {
-  //   return settings.house_ads_livewrapped_tag_id_above_site_header_mobile;
-  // }
+
+  get isMobile() {
+    return this.site.mobileView;
+  }
 
   get adIndex() {
     return "not_applicable";
@@ -26,8 +26,11 @@ export default class AdAboveSiteHeader extends Component {
   <template>
     {{#if this.showAd}}
       <div class="livewrapped-ad-above-site-header">
-        <LivewrappedAd @tagId={{this.tagIdDesktop}} @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_desktop_classes')}}/>
-        {{!-- <LivewrappedAd @tagId={{this.tagIdMobile}}  @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_mobile_classes')}}/> --}}
+        {{#if this.isMobile}}
+          <LivewrappedAd @tagId={{this.tagId}} @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_mobile_classes')}}/>
+        {{else}}
+          <LivewrappedAd @tagId={{this.tagId}} @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_desktop_classes')}}/>
+        {{/if}}
       </div>
     {{/if}}
   </template>
