@@ -11,28 +11,10 @@ export default {
       window.lwhb = window.lwhb || { cmd: [] };
       window.googletag = window.googletag || { cmd: [] };
 
-      api.modifyClass("route:application", {
-        pluginId: PLUGIN_ID,
-        actions: {
-          willTransition() {
-            this._super(...arguments);
-            console.log("before transition - application");
-            console.log('INFO: page change: reset lw page ads');
-            window.lwhb.cmd.push(() => { window.lwhb.resetPage(true) })
-          }
-        }
-      });
-
-      api.modifyClass("route:topic", {
-        pluginId: PLUGIN_ID,
-        actions: {
-          willTransition() {
-            this._super(...arguments);
-            console.log("before transition - topic");
-            console.log('INFO: page change: reset lw page ads');
-            window.lwhb.cmd.push(() => { window.lwhb.resetPage(true) })
-          }
-        }
+      const router = api.container.lookup("service:router");
+      router.on("routeWillChange", () => {
+        console.log('INFO: page change: reset lw page ads')
+        window.lwhb.cmd.push(() => { window.lwhb.resetPage(true) })
       });
 
       api.modifyClass("component:ad-slot", {
