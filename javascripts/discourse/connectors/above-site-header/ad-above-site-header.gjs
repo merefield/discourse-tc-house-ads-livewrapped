@@ -27,9 +27,9 @@ export default class AdAboveSiteHeader extends Component {
     {{#if this.showAd}}
       <div class="livewrapped-ad-above-site-header">
         {{#if this.isMobile}}
-          <LivewrappedAd @tagId={{this.tagId}} @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_mobile_classes')}}/>
+          <LivewrappedAd @tagId={{this.tagId}} @adIndex={{this.adIndex}} @refresh=true @adClass={{i18n (themePrefix 'house_ads_livewrapped_mobile_classes')}}/>
         {{else}}
-          <LivewrappedAd @tagId={{this.tagId}} @adIndex={{this.adIndex}} @adClass={{i18n (themePrefix 'house_ads_livewrapped_desktop_classes')}}/>
+          <LivewrappedAd @tagId={{this.tagId}} @adIndex={{this.adIndex}} @refresh=true @adClass={{i18n (themePrefix 'house_ads_livewrapped_desktop_classes')}}/>
         {{/if}}
       </div>
     {{/if}}
