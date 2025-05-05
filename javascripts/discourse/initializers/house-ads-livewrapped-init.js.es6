@@ -1,4 +1,3 @@
-import { debug } from "@glimmer/validator";
 import discourseComputed from "discourse-common/utils/decorators";
 import { withPluginApi } from "discourse/lib/plugin-api";
 
@@ -29,7 +28,7 @@ export default {
         isValidAdSpot() {
           const adIndexIsValid = this.adIndex !== undefined && this.adIndex !== null && this.adIndex !== 0;
           const isFirstOrUndefinedPost = this.attrs?.current_post_number?.value === undefined || this.attrs?.current_post_number?.value === 1;
-          
+
           if (adIndexIsValid && isFirstOrUndefinedPost) {
             return 'active-ad-location';
           }
