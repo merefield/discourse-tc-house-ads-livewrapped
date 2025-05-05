@@ -33,7 +33,7 @@ export default class LivewrappedAd extends Component {
 
   @action
   async refreshAd() {
-    if (isTesting() || this.args.adIndex < 1 || this.args.adIndex === null || this.args.adIndex === undefined) {
+    if (isTesting() || this.args?.currentPostNumber > 1 || this.args.adIndex < 1 || this.args.adIndex === null || this.args.adIndex === undefined) {
       return; // Don't load external JS during tests
     };
     await loadScript(LIVEWRAPPED_SCRIPT_SRC + "?pid=" + settings.house_ads_livewrapped_source_script_pid, {
@@ -50,7 +50,7 @@ export default class LivewrappedAd extends Component {
 
   @action
   async triggerAd() {
-    if (isTesting() || this.args.adIndex < 1 || this.args.adIndex === null || this.args.adIndex === undefined) {
+    if (isTesting() || this.args?.currentPostNumber > 1 || this.args.adIndex < 1 || this.args.adIndex === null || this.args.adIndex === undefined) {
       return; // Don't load external JS during tests
     };
     await loadScript(LIVEWRAPPED_SCRIPT_SRC + "?pid=" + settings.house_ads_livewrapped_source_script_pid, {

@@ -1,4 +1,4 @@
 {{#if showAd}}
-  <LivewrappedAd @tagId={{this.tagIdDesktop}} @adIndex={{this.adIndex}} @adClass={{theme-i18n 'house_ads_livewrapped_desktop_classes'}}/>
-  <LivewrappedAd @tagId={{this.tagIdMobile}}  @adIndex={{this.adIndex}} @adClass={{theme-i18n 'house_ads_livewrapped_mobile_classes'}}/>
+  <LivewrappedAd @tagId={{this.tagIdDesktop}} @adIndex={{this.adIndex}} @currentPostNumber={{@current_post_number}} @adClass={{theme-i18n 'house_ads_livewrapped_desktop_classes'}}/>
+  <LivewrappedAd @tagId={{this.tagIdMobile}}  @adIndex={{this.adIndex}} @currentPostNumber={{@current_post_number}} @adClass={{theme-i18n 'house_ads_livewrapped_mobile_classes'}}/>
 {{/if}}
